@@ -1,3 +1,28 @@
+<?php
+/*
+  =============================================================================
+  PHP SESSION HIT COUNTER LOGIC
+  - session_start() must be called at the very top before any HTML output.
+  - Checks if the current visitor session has been counted.
+  - If not, increments the hit count in count.txt and sets $_SESSION['counted'].
+  =============================================================================
+*/
+session_start();
+
+$filename = "count.txt";
+
+if (!file_exists($filename)) {
+    file_put_contents($filename, "0");
+}
+
+$totalHits = (int) file_get_contents($filename);
+
+if (!isset($_SESSION['counted'])) {
+    $totalHits++;
+    file_put_contents($filename, (string)$totalHits);
+    $_SESSION['counted'] = true;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>

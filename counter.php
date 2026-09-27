@@ -1,61 +1,21 @@
 <?php
 /*
   =============================================================================
-  STEP 1: INITIALIZE PHP SESSION
-  session_start() must be called at the very top of the script BEFORE any HTML 
-  output is sent to the browser.
-  
-  What session_start() does:
-  It tells PHP to start tracking a unique visitor session using a session ID 
-  stored in a temporary server file and browser cookie.
+  READ PERMANENT HIT COUNT FROM count.txt
+  - Hit counter incrementing logic is handled automatically in banner.php when 
+    the site loads.
+  - counter.php only reads and displays the count stored in count.txt without 
+    incrementing it.
   =============================================================================
 */
-session_start();
-
-// File name where total visit count is saved permanently on disk
 $filename = "count.txt";
 
-/*
-  =============================================================================
-  STEP 2: READ THE PERMANENT COUNT FROM count.txt
-  - count.txt stores the master total visit count across all users and server reboots.
-  - If count.txt does not exist yet, we initialize it with 0.
-  =============================================================================
-*/
+// Read current count from file and convert to an integer (default to 0 if file does not exist)
 if (!file_exists($filename)) {
     file_put_contents($filename, "0");
 }
 
-// Read current count from file and convert to an integer
 $totalHits = (int) file_get_contents($filename);
-
-/*
-  =============================================================================
-  STEP 3: SESSION-BASED HIT COUNTING LOGIC (Requirement 6)
-  
-  Why use $_SESSION instead of simple page-load counting?
-  - Simple page-load counting increments the number every time the user hits F5 (refresh).
-  - $_SESSION['counted'] acts as a flag for the current browser session.
-  - When a user first opens the site, $_SESSION['counted'] is NOT set. We increment 
-    the count and set $_SESSION['counted'] = true.
-  - If the user reloads or refreshes the page, $_SESSION['counted'] is ALREADY true, 
-    so the counter DOES NOT increment again!
-  =============================================================================
-*/
-$isNewSession = false;
-
-if (!isset($_SESSION['counted'])) {
-    // Increment the running total
-    $totalHits++;
-    
-    // Save the new total permanently back into count.txt
-    file_put_contents($filename, (string)$totalHits);
-    
-    // Set the session flag so this session is marked as counted
-    $_SESSION['counted'] = true;
-    
-    $isNewSession = true;
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,12 +80,6 @@ if (!isset($_SESSION['counted'])) {
             margin-bottom: 15px;
         }
 
-        .status-new {
-            background-color: #EBF2ED;
-            color: #3D5A44;
-            border: 1px solid #A2BFA7;
-        }
-
         .status-existing {
             background-color: #F9F3EA;
             color: #8C6A43;
@@ -164,16 +118,10 @@ if (!isset($_SESSION['counted'])) {
     <div class="counter-card">
         <h2>PHP Session Visitor Hit Counter</h2>
 
-        <!-- Status Badge explaining if this request incremented the counter -->
-        <?php if ($isNewSession): ?>
-            <div class="status-badge status-new">
-                🎉 New Session Detected &mdash; Count Incremented!
-            </div>
-        <?php else: ?>
-            <div class="status-badge status-existing">
-                🔄 Existing Session Active &mdash; Refresh Ignored (Count Unchanged)
-            </div>
-        <?php endif; ?>
+        <!-- Status Badge -->
+        <div class="status-badge status-existing">
+            📊 Live Visitor Counter &mdash; Auto-tracked on Site Load (banner.php)
+        </div>
 
         <!-- Total Count Box -->
         <div class="count-box">
@@ -188,10 +136,9 @@ if (!isset($_SESSION['counted'])) {
         <div class="explanation">
             <strong>How this PHP Session Counter Works:</strong>
             <ul>
-                <li><code>session_start()</code> initializes session tracking when you load this page.</li>
-                <li><code>$_SESSION['counted']</code> marks your session once you visit.</li>
-                <li>If you hit <strong>Refresh (F5)</strong>, the count stays at <strong><?php echo $totalHits; ?></strong> because your session is already flagged!</li>
-                <li>Opening a new browser tab or incognito window starts a <em>new session</em>, incrementing the count.</li>
+                <li>The session hit-counter increment logic runs automatically in <code>banner.php</code> when the site loads.</li>
+                <li><code>session_start()</code> and <code>$_SESSION['counted']</code> ensure each session is counted only once.</li>
+                <li><code>counter.php</code> simply reads and displays the count stored in <code>count.txt</code> without incrementing it.</li>
             </ul>
         </div>
 
