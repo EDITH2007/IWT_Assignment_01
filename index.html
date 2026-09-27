@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Page title displayed on the browser window/tab -->
+    <title>IWT Mini Project - Classic Frameset Website</title>
+</head>
+
+<!-- 
+  =============================================================================
+  HTML FRAMESET (Requirement 1 & HTML Tags: <frameset>, <frame>):
+  - The <frameset> tag replaces the <body> tag in a frames-based webpage layout.
+  - The 'rows="18%,10%,*"' attribute splits the screen into 3 horizontal sections:
+      - Row 1 (18% height): Top banner (banner.html)
+      - Row 2 (10% height): Navigation bar (nav.html)
+      - Row 3 (* = remaining space): Main content display area (main.html)
+  =============================================================================
+-->
+<frameset rows="18%,10%,*">
+    
+    <!-- Frame 1: Header / Banner (no scrolling, fixed size) -->
+    <frame src="banner.html" name="bannerFrame" scrolling="no" noresize>
+
+    <!-- Frame 2: Navigation Bar (no scrolling, fixed size) -->
+    <frame src="nav.html" name="navFrame" scrolling="no" noresize>
+
+    <!-- Frame 3: Main Content Window (target frame named "mainFrame") -->
+    <!-- Links in nav.html use target="mainFrame" to open pages inside this frame -->
+    <frame src="main.html" name="mainFrame">
+
+    <!-- 
+      <noframes> Tag: Provides fallback content for browsers that do not 
+      support HTML framesets.
+    -->
+    <noframes>
+        <body style="font-family: Arial, sans-serif; background-color: #FAF6F0; color: #383330; text-align: center; padding: 50px;">
+            <h2>Frames Not Supported</h2>
+            <p>Your web browser does not support classic HTML frames. Please open individual HTML files directly.</p>
+        </body>
+    </noframes>
+
+</frameset>
+</html>

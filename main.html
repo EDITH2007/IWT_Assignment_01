@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Content - Client-Side Image Map</title>
+    <!-- Simple light color theme styles -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #FAF6F0; /* Soft warm cream background */
+            color: #383330;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E0D7C6;
+        }
+
+        h2 {
+            color: #527359; /* Sage green heading */
+            margin-top: 0;
+        }
+
+        p.intro {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #55504C;
+        }
+
+        /* Styling for the interactive map image container */
+        .map-wrapper {
+            margin: 20px 0;
+        }
+
+        img.map-image {
+            border: 2px solid #D4C7B0;
+            border-radius: 6px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .guide-box {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .guide-item {
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .guide-circle {
+            background-color: #EBF2ED;
+            color: #3D5A44;
+            border: 1px solid #A2BFA7;
+        }
+
+        .guide-rect {
+            background-color: #FDF0EC;
+            color: #9E4327;
+            border: 1px solid #EBBBAA;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #77706A;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Interactive Client-Side Image Map</h2>
+        
+        <p class="intro">
+            Welcome to the main content area! Below is a <strong>Client-Side Image Map</strong> demo. 
+            Unlike standard image links that link the entire picture to one web page, an image map 
+            divides a single image into multiple clickable hotspot regions (coordinates).
+        </p>
+
+        <!-- 
+          =============================================================================
+          CLIENT-SIDE IMAGE MAP IMPLEMENTATION (HTML Tags: <img>, <map>, <area>):
+          
+          1. <img> Tag:
+             - 'src' specifies the graphic image file (imagemap.png).
+             - 'usemap="#siteMap"' links this image to the <map> element named "siteMap".
+             The '#' symbol is required to reference the map name.
+
+          2. <map> Tag:
+             - Defines the set of clickable hotspot areas associated with the image.
+             - 'name="siteMap"' matches the value given in the <img> usemap attribute.
+
+          3. <area> Tags:
+             - Defines individual clickable regions on top of the image.
+             - Hotspot 1 (Circle): 
+                 shape="circle" coords="x_center, y_center, radius"
+                 coords="150,115,50" -> Center at (150, 115), radius 50 pixels.
+                 href="home.html" -> Loads home.html when clicked.
+             - Hotspot 2 (Rectangle):
+                 shape="rect" coords="x1, y1, x2, y2"
+                 coords="370,65,570,165" -> Top-left (370, 65) to bottom-right (570, 165).
+                 href="contact.html" -> Loads contact.html when clicked.
+          =============================================================================
+        -->
+        <div class="map-wrapper">
+            <!-- Image with usemap attribute pointing to #siteMap -->
+            <img src="imagemap.png" usemap="#siteMap" alt="Interactive Shapes Map" class="map-image" width="620" height="220">
+
+            <!-- Map element containing hotspot definitions -->
+            <map name="siteMap">
+                <!-- Circle Hotspot -> Links to home.html -->
+                <area shape="circle" coords="150,115,50" href="home.html" alt="Home Section" title="Click Circle Hotspot for Home Page">
+                
+                <!-- Rectangle Hotspot -> Links to contact.html -->
+                <area shape="rect" coords="370,65,570,165" href="contact.html" alt="Contact Section" title="Click Rectangular Hotspot for Contact Page">
+            </map>
+        </div>
+
+        <!-- Visual legend explaining the hotspots to the user -->
+        <div class="guide-box">
+            <div class="guide-item guide-circle">
+                🟢 Left Shape: Circle Hotspot &rarr; Links to home.html
+            </div>
+            <div class="guide-item guide-rect">
+                🟧 Right Shape: Rectangle Hotspot &rarr; Links to contact.html
+            </div>
+        </div>
+
+        <p class="note">
+            Hover your mouse cursor over the circle or rectangle in the graphic above to test the clickable hotspots!
+        </p>
+    </div>
+
+</body>
+</html>

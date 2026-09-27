@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navigation Menu</title>
+    <!-- Styling for navigation bar links using Sage Green & Terracotta buttons -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FAF6F0; /* Soft cream background */
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .nav-bar {
+            padding: 8px 0;
+        }
+
+        /* 
+           NAVIGATION LINKS (HTML Tag: <a>)
+           Styled as clean buttons using sage green colors.
+        */
+        .nav-bar a {
+            display: inline-block;
+            text-decoration: none;
+            color: #FFFFFF;
+            background-color: #527359; /* Sage green button background */
+            padding: 6px 16px;
+            margin: 0 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Hover effect changing color to terracotta */
+        .nav-bar a:hover {
+            background-color: #D97757; /* Terracotta highlight on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+      =============================================================================
+      NAVIGATION MENU (HTML Tag: <a> with target attribute):
+      - CRITICAL REQUIREMENT: Every link has target="mainFrame".
+      - When clicked, the browser loads the destination URL inside the frame 
+        named "mainFrame" (Row 3 of index.html), keeping the top banner and 
+        navigation menu fixed on screen!
+      =============================================================================
+    -->
+    <div class="nav-bar">
+        <!-- Link to Main Interactive Map Page -->
+        <a href="main.html" target="mainFrame">Home (Image Map)</a>
+
+        <!-- Link to Home Info Page -->
+        <a href="home.html" target="mainFrame">Circle Info Page</a>
+
+        <!-- Link to Contact Page -->
+        <a href="contact.html" target="mainFrame">Contact Page</a>
+
+        <!-- Link to PHP Session Counter Page -->
+        <a href="counter.php" target="mainFrame">Visitor Counter</a>
+    </div>
+
+</body>
+</html>

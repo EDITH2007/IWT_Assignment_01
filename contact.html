@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us - Rectangular Hotspot Target</title>
+    <!-- Simple warm cream & terracotta styling -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #FAF6F0; /* Warm cream background */
+            color: #383330;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0D7C6;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        h2 {
+            color: #D97757; /* Terracotta heading */
+            margin-top: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #FDF0EC;
+            color: #9E4327;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border: 1px solid #EBBBAA;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #55504C;
+        }
+
+        .contact-info {
+            background-color: #FAF6F0;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* Link button */
+        a.back-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 18px;
+            background-color: #D97757; /* Terracotta background */
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        a.back-btn:hover {
+            background-color: #527359; /* Sage green hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+      CONTACT CONFIRMATION PAGE:
+      This page loads when the user clicks on the RECTANGULAR hotspot inside main.html's image map.
+    -->
+    <div class="card">
+        <div class="badge">🟧 Rectangular Hotspot Target Reached</div>
+        <h2>Contact Us Page</h2>
+
+        <p>
+            You have successfully navigated here by clicking the <strong>Rectangular Hotspot</strong> 
+            (coords: <code>370,65,570,165</code>) on the client-side image map inside the main content frame.
+        </p>
+
+        <p>
+            This simple placeholder confirms that the HTML <code>&lt;area shape="rect"&gt;</code> 
+            tag correctly routed your browser to <code>contact.html</code>!
+        </p>
+
+        <!-- Simple dummy contact details -->
+        <div class="contact-info">
+            <strong>Department:</strong> Internet &amp; Web Technology Lab<br>
+            <strong>Project Author:</strong> Student Developer<br>
+            <strong>Email:</strong> student@college.edu
+        </div>
+
+        <!-- Link back to the image map page -->
+        <a href="main.html" class="back-btn">&larr; Return to Interactive Image Map</a>
+    </div>
+
+</body>
+</html>
