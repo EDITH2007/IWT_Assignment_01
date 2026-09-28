@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Visitor Counter - JavaScript Web Storage</title>
+    <!-- Styling using Warm Cream, Sage Green & Terracotta palette -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #FAF6F0; /* Soft warm cream background */
+            color: #383330;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .counter-card {
+            max-width: 580px;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            padding: 30px 25px;
+            border-radius: 8px;
+            border: 1px solid #E0D7C6;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #527359; /* Sage green heading */
+            margin-top: 0;
+        }
+
+        /* Styled counter display box */
+        .count-box {
+            background-color: #FAF6F0;
+            border: 2px dashed #D4C7B0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .count-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #D97757; /* Terracotta count display color */
+            margin: 10px 0;
+        }
+
+        .count-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #527359; /* Sage green text */
+            font-weight: bold;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-existing {
+            background-color: #F9F3EA;
+            color: #8C6A43;
+            border: 1px solid #E3D2BF;
+        }
+
+        .status-new {
+            background-color: #EBF2ED;
+            color: #3D5A44;
+            border: 1px solid #A2BFA7;
+        }
+
+        .explanation {
+            text-align: left;
+            background-color: #FAF6F0;
+            border-left: 4px solid #527359;
+            padding: 12px 15px;
+            margin-top: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        a.back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 18px;
+            background-color: #527359;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        a.back-btn:hover {
+            background-color: #D97757;
+        }
+    </style>
+
+    <!-- 
+      =============================================================================
+      VISITOR COUNTER DISPLAY & EXPLANATION (JavaScript Web Storage):
+      - Read-Only Display: This script reads the value of "totalVisits" from 
+        localStorage and "counted" from sessionStorage. It DOES NOT increment count.
+      - What is sessionStorage?
+        JavaScript equivalent of PHP session variables. Stores session flags 
+        temporarily until the tab or browser window is closed.
+      - What is localStorage?
+        JavaScript equivalent of a count.txt file. Permanently stores key-value pairs 
+        in the user's web browser across restarts.
+      - Per-Browser Note:
+        Since JavaScript runs locally in the client browser, this counter operates 
+        per browser installation. Tracking all visitors globally requires a backend server.
+      =============================================================================
+    -->
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            try {
+                // Read current total visit count from localStorage (default to 0 if missing)
+                var totalVisits = localStorage.getItem("totalVisits") || "0";
+                document.getElementById("visitCountDisplay").textContent = totalVisits;
+
+                // Check if current session was already counted via sessionStorage
+                var isCounted = sessionStorage.getItem("counted") === "true";
+                var statusBadge = document.getElementById("statusBadge");
+
+                if (isCounted) {
+                    statusBadge.textContent = "📊 Session Status: Already Counted in this Session";
+                    statusBadge.className = "status-badge status-existing";
+                } else {
+                    statusBadge.textContent = "📊 Session Status: New Session (Not Counted Yet)";
+                    statusBadge.className = "status-badge status-new";
+                }
+            } catch (err) {
+                console.error("Error reading counter storage:", err);
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <div class="counter-card">
+        <h2>JavaScript Web Storage Visitor Counter</h2>
+
+        <!-- Status Badge (populated dynamically by JavaScript) -->
+        <div id="statusBadge" class="status-badge status-existing">
+            📊 Loading Session Status...
+        </div>
+
+        <!-- Total Count Box -->
+        <div class="count-box">
+            <div class="count-label">Total Browser Sessions</div>
+            <div id="visitCountDisplay" class="count-number">0</div>
+            <p style="margin: 0; font-size: 12px; color: #77706A;">
+                Stored locally in browser: <code>localStorage["totalVisits"]</code>
+            </p>
+        </div>
+
+        <!-- Beginner Student Explanation Box -->
+        <div class="explanation">
+            <strong>How this JavaScript Visitor Counter Works:</strong>
+            <ul>
+                <li><strong>Automatic Count on Site Load:</strong> The hit counter logic runs inside <code>header.html</code> whenever the site loads.</li>
+                <li><strong>Page Refresh:</strong> Refreshing the page (F5 / Ctrl+R) does <em>NOT</em> increase the count because <code>sessionStorage["counted"]</code> persists during the tab session.</li>
+                <li><strong>New Sessions:</strong> Opening a new browser tab, opening an incognito/private window, or closing and reopening the browser starts a new session and increments the count by 1.</li>
+                <li><strong>sessionStorage vs localStorage:</strong> <code>sessionStorage</code> (like PHP session variables) lasts until the tab closes. <code>localStorage</code> (like <code>count.txt</code>) persists permanently across browser restarts.</li>
+                <li><strong>Client-Side Limitation:</strong> Because JavaScript executes in your browser, this count is per-browser. A shared, site-wide counter across all internet users requires a backend web server.</li>
+            </ul>
+        </div>
+
+        <!-- Return button -->
+        <a href="main.html" class="back-btn">&larr; Back to Main Content</a>
+    </div>
+
+</body>
+</html>

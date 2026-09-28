@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Site Header</title>
+    <!-- Simple inline styling using warm light cream background and terracotta accents -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F4EFEA; /* Light warm cream/beige background */
+            font-family: Arial, Helvetica, sans-serif;
+            color: #383330; /* Dark charcoal text for high contrast */
+            text-align: center;
+            border-bottom: 3px solid #D97757; /* Terracotta bottom border */
+        }
+
+        .banner-container {
+            padding: 12px 10px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #D97757; /* Terracotta title color */
+            letter-spacing: 1px;
+        }
+
+        p {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: #527359; /* Sage green subtitle color */
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- 
+      =============================================================================
+      JAVASCRIPT VISITOR HIT COUNTER LOGIC:
+      - What is sessionStorage?
+        sessionStorage is the JavaScript client-side equivalent of PHP session variables.
+        It stores data only for the duration of the current browser tab session.
+        When the tab or browser window is closed, sessionStorage is automatically wiped.
+      
+      - What is localStorage?
+        localStorage is the JavaScript client-side equivalent of a text file (like count.txt).
+        It permanently stores key-value data in the user's browser with no expiration date.
+        Data stays saved even after the browser is restarted.
+
+      - Per-Browser Note:
+        Because JavaScript runs entirely on the client side (in the visitor's web browser),
+        localStorage and sessionStorage store counts locally per browser installation.
+        A shared, site-wide counter for all visitors across different devices would 
+        require a backend server (like PHP/Node.js + database or file storage).
+      =============================================================================
+    -->
+    <script>
+        (function trackVisitorSession() {
+            try {
+                // Check if the current browser session has already been counted
+                var isCounted = sessionStorage.getItem("counted");
+
+                if (!isCounted) {
+                    // Read current count from localStorage (default to 0 if key doesn't exist)
+                    var currentVisits = parseInt(localStorage.getItem("totalVisits") || "0", 10);
+
+                    // Increment visit count by 1
+                    currentVisits += 1;
+
+                    // Save updated count back into localStorage
+                    localStorage.setItem("totalVisits", currentVisits.toString());
+
+                    // Mark this session as counted in sessionStorage
+                    sessionStorage.setItem("counted", "true");
+                }
+            } catch (err) {
+                // Wrap in try/catch block so storage permission/quota issues never crash the script
+                console.error("JavaScript Visitor Counter Error:", err);
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- 
+      HEADER CONTAINER:
+      Displays the main website logo header text centered at the top of the frameset.
+    -->
+    <div class="banner-container">
+        <h1>INTERNET &amp; WEB TECHNOLOGY ACADEMIC PORTAL</h1>
+        <p>Simple Mini-Project: HTML Frames, Image Maps &amp; JavaScript Session Counter</p>
+    </div>
+
+</body>
+</html>

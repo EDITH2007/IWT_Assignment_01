@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <!-- Page title displayed on the browser window/tab -->
     <title>IWT Mini Project - Classic Frameset Website</title>
 </head>
@@ -10,7 +11,7 @@
   HTML FRAMESET (Requirement 1 & HTML Tags: <frameset>, <frame>):
   - The <frameset> tag replaces the <body> tag in a frames-based webpage layout.
   - The 'rows="18%,10%,*"' attribute splits the screen into 3 horizontal sections:
-      - Row 1 (18% height): Top banner (banner.html)
+      - Row 1 (18% height): Top header (header.html)
       - Row 2 (10% height): Navigation bar (nav.html)
       - Row 3 (* = remaining space): Main content display area (main.html)
   =============================================================================
@@ -18,7 +19,7 @@
 <frameset rows="18%,10%,*">
     
     <!-- Frame 1: Header / Banner (no scrolling, fixed size) -->
-    <frame src="banner.php" name="bannerFrame" scrolling="no" noresize>
+    <frame src="header.html" name="bannerFrame" scrolling="no" noresize>
 
     <!-- Frame 2: Navigation Bar (no scrolling, fixed size) -->
     <frame src="nav.html" name="navFrame" scrolling="no" noresize>
